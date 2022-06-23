@@ -8,6 +8,20 @@
 </head>
 <body>
   <h1>Hello/Index</h1>
-  <p>{{$msg}}</p>
+  <p>{!!$msg!!}</p>
+  <form action="/hello" method="post">
+    @csrf
+
+    <div>Name:<input type="text" name="name"></div>
+    <div>Mail:<input type="text" name="mail"></div>
+    <div>Tel:<input type="text" name="tel"></div>
+    <input type="submit">
+    <hr>
+    <ol>
+      @for($i = 0; $i < count($keys); $i++)
+        <li>{{$keys[$i]}}:{{$values}</li>
+      @endfor
+    </ol>
+  </form>
 </body>
 </html>
