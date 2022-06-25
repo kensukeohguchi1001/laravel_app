@@ -2,37 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\MyClasses\MyService;
 
 class HelloController extends Controller
 {
-    public function index(Request $request, Response $response)
+    public function __construct(MyService $myservice)
     {
-        $msg = 'please input text:';
-        $keys = [];
-        $values = [];
-        if ($request->isMethod('post'))
-        {
-            $form = $request->only(['name', 'mail', 'tel']);
-            $keys = array_keys($form);
-            $values = array_values($form);
-            $msg = old('name'). ','. old('mail'). ',' . old('tel');
-            $data = [
-                'msg' => $msg,
-                'keys' => $keys,
-                'values' => $values
-            ];
-            $request->flash();
-            return view('hello.index', $data);
-        }
+        $myservice = app('App\MyClasses\MyService');
+    }
 
+    public function index(MyService $myservice, int $id = -1)
+
+    {
+        $myservice->setId($id);
         $data = [
-            'msg' => $msg,
-            'keys' => $keys,
-            'values' => $values
+            'msg' => $myservice->say(),
+            'data' => $myservice->alldata()
         ];
-        $request->flash();
+
         return view('hello.index', $data);
     }
 }
