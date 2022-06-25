@@ -11,15 +11,14 @@
   <p>{!!$msg!!}</p>
   <form action="/hello" method="post">
     @csrf
-
-    <div>Name:<input type="text" name="name"></div>
-    <div>Mail:<input type="text" name="mail"></div>
-    <div>Tel:<input type="text" name="tel"></div>
+    <div>Name:<input type="text" name="name" value="{{old('name')}}"></div>
+    <div>Mail:<input type="text" name="mail" value="{{old('mail')}}"></div>
+    <div>Tel:<input type="text" name="tel" value="{{old('tel')}}"></div>
     <input type="submit">
     <hr>
     <ol>
       @for($i = 0; $i < count($keys); $i++)
-        <li>{{$keys[$i]}}:{{$values}</li>
+        <li>{{$keys[$i]}}:{{$values[$i]}}</li>
       @endfor
     </ol>
   </form>
