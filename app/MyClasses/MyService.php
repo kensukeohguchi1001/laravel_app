@@ -2,7 +2,7 @@
 
 namespace App\MyClasses;
 
-class MyService
+class MyService implements MyServiceInterface
 {
     private $id = -1;
     private $msg = 'no id...';

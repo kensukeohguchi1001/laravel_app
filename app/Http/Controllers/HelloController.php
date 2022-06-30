@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\MyClasses\MyService;
+use App\MyClasses\MyServiceInterface;
+use App\Facades\MyService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Person;
 
 class HelloController extends Controller
 {
-    public function __construct(MyService $myservice)
+    public function index(Request $request)
     {
-        $myservice = app('App\MyClasses\MyService');
-    }
-
-    public function index(MyService $myservice, int $id = -1)
-
-    {
-        $myservice->setId($id);
+        $id = $request->query('page');
+        $msg = 'show page:' . $id;
+        $result = DB::table('people')->simplePaginate(3);
         $data = [
-            'msg' => $myservice->say(),
-            'data' => $myservice->alldata()
+            'msg' => $msg,
+            'data' => $result,
         ];
 
         return view('hello.index', $data);
