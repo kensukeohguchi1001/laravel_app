@@ -18,5 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index');
+Route::get('/hello', 'App\Http\Controllers\HelloController@index');
+Route::get('/hello/{person}', 'App\Http\Controllers\HelloController@index');
+Route::post('/hello', 'App\Http\Controllers\HelloController@send');
+Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
+Route::get('/hello/json', 'App\Http\Controllers\HelloController@json');
+Route::get('/hello/json/{id}', 'App\Http\Controllers\HelloController@json');
+
+
+Route::get('/hello/{id}/{name}', 'App\Http\Controllers\HelloController@save');
 Route::post('/hello', 'App\Http\Controllers\HelloController@index');
